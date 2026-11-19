@@ -1,5 +1,6 @@
 
-const ORDERS_KEY = "warungTupaja_daftar_pesanan";
+export const ORDERS_KEY = "warungTupaja_daftar_pesanan";
+export const ORDERS_EVENT = "warungTupaja_pesanan_berubah";
 const ACTIVE_ORDER_KEY = "warungTupaja_pesanan_aktif";
 const LEGACY_ORDER_KEY = "warungTupaja_pesanan";
 
@@ -47,6 +48,7 @@ export function saveOrders(orders) {
   if (typeof window === "undefined") return;
 
   localStorage.setItem(ORDERS_KEY, JSON.stringify(orders));
+  window.dispatchEvent(new Event(ORDERS_EVENT));
 }
 
 export function addOrder(order) {

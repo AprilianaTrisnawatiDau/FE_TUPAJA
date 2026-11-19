@@ -1,13 +1,10 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  getOrders,
-  saveOrders,
-} from "../../../services/orderStorage";
+import { usePesananPelangganMentah } from "../../../lib/pesananPelanggan";
+import { useIsClient } from "../../../hooks/useIsClient";
 import styles from "./tracking.module.css";
 
 function formatRupiah(value) {
@@ -16,35 +13,9 @@ function formatRupiah(value) {
 
 export default function TrackingPage() {
   const router = useRouter();
-  const [pesanan, setPesanan] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    function refreshOrders() {
-      const orders = getOrders();
-      const now = Date.now();
-
-      const updated = orders.map((order) => {
-        if (
-          order.status === "Menunggu" &&
-          now - Number(order.waktuPesan || now) >= 30000
-        ) {
-          return { ...order, status: "Proses" };
-        }
-
-        return order;
-      });
-
-      saveOrders(updated);
-      setPesanan(updated);
-      setLoaded(true);
-    }
-
-    refreshOrders();
-
-    const timer = setInterval(refreshOrders, 1000);
-    return () => clearInterval(timer);
-  }, []);
+  // Status pesanan ikut berubah otomatis saat admin memperbarui pesanan
+  const pesanan = usePesananPelangganMentah();
+  const isClient = useIsClient();
 
   function handleBatalkan(orderId) {
     router.push(
@@ -52,7 +23,7 @@ export default function TrackingPage() {
     );
   }
 
-  if (!loaded) return null;
+  if (!isClient) return null;
 
   const pesananAktif = pesanan.filter(
     (order) => order.status !== "Dibatalkan"

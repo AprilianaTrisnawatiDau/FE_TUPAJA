@@ -9,12 +9,17 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.3.0",
+    "lucide-react": "^1.74.0",
     "next": "16.4.5",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "recharts": "^3.10.1"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4",
     "eslint": "^9",
-    "eslint-config-next": "16.4.5"
+    "eslint-config-next": "16.4.5",
+    "tailwindcss": "^4"
   }
 }

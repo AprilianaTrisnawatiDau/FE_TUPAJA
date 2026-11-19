@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -14,7 +14,7 @@ function formatRupiah(value) {
   return `Rp${Number(value || 0).toLocaleString("id-ID")}`;
 }
 
-export default function PembayaranQrisPage() {
+function PembayaranQrisContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
@@ -131,5 +131,13 @@ export default function PembayaranQrisPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function PembayaranQrisPage() {
+  return (
+    <Suspense fallback={null}>
+      <PembayaranQrisContent />
+    </Suspense>
   );
 }

@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import styles from "./rincian-pembatalan.module.css";
@@ -11,7 +11,7 @@ function formatRupiah(value) {
   return `Rp${Number(value || 0).toLocaleString("id-ID")}`;
 }
 
-export default function RincianPembatalanPage() {
+function RincianPembatalanContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
 
@@ -160,5 +160,13 @@ export default function RincianPembatalanPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function RincianPembatalanPage() {
+  return (
+    <Suspense fallback={null}>
+      <RincianPembatalanContent />
+    </Suspense>
   );
 }

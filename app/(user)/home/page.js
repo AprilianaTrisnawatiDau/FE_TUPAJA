@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 import styles from "./home.module.css";
 
@@ -18,7 +19,7 @@ import PopularMenu from "../../../components/home/PopularMenu";
 import CategoryMenu from "../../../components/home/CategoryMenu";
 import MenuCard from "../../../components/home/MenuCard";
 
-export default function HomePage({ showClosedInitially = false }) {
+function HomeContent({ showClosedInitially = false }) {
   const searchParams = useSearchParams();
 
   const [cart, setCart] = useState([]);
@@ -242,5 +243,13 @@ export default function HomePage({ showClosedInitially = false }) {
         </div>
       )}
     </MobileFrame>
+  );
+}
+
+export default function HomePage(props) {
+  return (
+    <Suspense fallback={null}>
+      <HomeContent {...props} />
+    </Suspense>
   );
 }

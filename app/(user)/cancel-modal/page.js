@@ -1,7 +1,7 @@
 
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getOrder, updateOrder } from "../../../services/orderStorage";
 import styles from "./cancel-modal.module.css";
@@ -13,7 +13,7 @@ const alasanPembatalan = [
   "Kesalahan pembayaran",
 ];
 
-export default function CancelModalPage() {
+function CancelModalContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -157,5 +157,13 @@ export default function CancelModalPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function CancelModalPage() {
+  return (
+    <Suspense fallback={null}>
+      <CancelModalContent />
+    </Suspense>
   );
 }

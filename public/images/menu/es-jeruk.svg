@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="14 18 172 172">
+<defs>
+<radialGradient id="bg" cx="50%" cy="40%" r="75%"><stop offset="0" stop-color="#fff4e6"/><stop offset="1" stop-color="#fbe3c6"/></radialGradient>
+<radialGradient id="plate" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#ffffff"/><stop offset=".8" stop-color="#f4f1ec"/><stop offset="1" stop-color="#dcd6cc"/></radialGradient>
+<radialGradient id="bowl" cx="50%" cy="30%" r="80%"><stop offset="0" stop-color="#e8483f"/><stop offset="1" stop-color="#9c1f22"/></radialGradient>
+<radialGradient id="soup" cx="50%" cy="50%" r="60%"><stop offset="0" stop-color="#f6c66a"/><stop offset="1" stop-color="#d98d2a"/></radialGradient>
+<radialGradient id="yolk" cx="40%" cy="35%" r="70%"><stop offset="0" stop-color="#ffd54a"/><stop offset="1" stop-color="#f29b0c"/></radialGradient>
+<filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#7a3d00" flood-opacity=".25"/></filter>
+</defs>
+<rect width="200" height="200" fill="url(#bg)"/>
+<ellipse cx="100" cy="176" rx="40" ry="8" fill="#7a3d00" opacity=".15"/><path d="M62,40 L72,172 Q100,180 128,172 L138,40 Z" fill="#ffffff" opacity=".55" stroke="#e9e2d6" stroke-width="2"/><linearGradient id="tea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd166"/><stop offset="1" stop-color="#f48a1e"/></linearGradient><path d="M66,66 L73,168 Q100,176 127,168 L134,66 Z" fill="url(#tea)"/><rect x="76" y="70" width="20" height="18" rx="3" fill="#fff" opacity=".55" transform="rotate(-12 86 79)"/><rect x="100" y="82" width="20" height="18" rx="3" fill="#fff" opacity=".5" transform="rotate(14 110 91)"/><rect x="84" y="100" width="18" height="16" rx="3" fill="#fff" opacity=".4" transform="rotate(8 93 108)"/><path d="M120,20 L104,120" stroke="#e23b3b" stroke-width="5" stroke-linecap="round"/><path d="M70,46 L76,160" stroke="#fff" stroke-width="4" opacity=".6" stroke-linecap="round"/><circle cx="134" cy="48" r="20" fill="#f7a21b"/><circle cx="134" cy="48" r="16" fill="#ffd36b"/><path d="M134,32 v32 M118,48 h32 M123,37 l22,22 M145,37 l-22,22" stroke="#f7a21b" stroke-width="1.6"/>
+</svg>

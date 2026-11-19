@@ -1,5 +1,6 @@
+
 {
-  "name": "my-app",
+  "name": "fe-tumapa",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,9 +10,12 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.3.0",
+    "lucide-react": "^1.74.0",
     "next": "16.3.7",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "recharts": "^3.10.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

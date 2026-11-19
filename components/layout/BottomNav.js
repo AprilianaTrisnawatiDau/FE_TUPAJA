@@ -28,7 +28,7 @@ export default function BottomNav() {
                     "flex flex-col items-center justify-center transition duration-200 active:scale-90",
                     active
                       ? "anim-nav-pop -mt-7 h-[54px] w-[54px] rounded-full bg-merah text-black shadow-lg shadow-merah/40 ring-4 ring-white"
-                      : "text-teks hover:-translate-y-0.5 hover:text-merah",
+                      : "text-black hover:-translate-y-0.5",
                   )}
                 >
                   <img

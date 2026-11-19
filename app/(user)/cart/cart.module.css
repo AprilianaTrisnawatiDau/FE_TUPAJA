@@ -1,0 +1,726 @@
+
+/* ==========================================
+   CART - WARUNG TUPAJA
+========================================== */
+
+.page {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.mobileFrame {
+  width: min(
+    375px,
+    calc((100dvh - 32px) * 375 / 812),
+    calc(100vw - 32px)
+  );
+
+  height: min(
+    812px,
+    calc(100dvh - 32px),
+    calc((100vw - 32px) * 812 / 375)
+  );
+
+  aspect-ratio: 375 / 812;
+  min-height: 0;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 399px) {
+  .page {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .mobileFrame {
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-white);
+  position: relative;
+}
+
+.cartBgCream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: var(--bg-cream);
+  z-index: 1;
+}
+
+.cartContentWrapper {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-white);
+  margin-top: 40px;
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px 5px;
+  background: var(--bg-white);
+  font-weight: 700;
+  font-size: 18px;
+  gap: 15px;
+  flex-shrink: 0;
+  border-radius: 30px 30px 0 0;
+}
+
+/* ==========================================
+   BUTTON BACK
+========================================== */
+
+.btnBack {
+  width: 35px;
+  height: 35px;
+  background: var(--primary-red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  flex-shrink: 0;
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.btnBack i {
+  display: inline-block;
+  transition: transform 350ms ease;
+}
+
+.scrollableContent {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 100px;
+  scrollbar-width: none;
+}
+
+.scrollableContent::-webkit-scrollbar {
+  display: none;
+}
+
+.cartItems {
+  padding: 10px 10px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.cartItem {
+  background: white;
+  border: 2.5px solid var(--primary-orange);
+  border-radius: 15px;
+  padding: 12px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  width: 100%;
+  min-height: 105px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    0 2px 5px rgba(0, 0, 0, 0.1);
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+.cartItem img {
+  width: 80px;
+  height: 80px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 4px solid var(--bg-white);
+  box-shadow:
+    0 5px 15px rgba(0, 0, 0, 0.4),
+    0 2px 5px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  transition: transform 250ms ease;
+}
+
+.cartDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.cartDetails h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.price {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.qtyControl {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.btnQty {
+  width: 35px;
+  height: 35px;
+  border-radius: 8px;
+  border: none;
+  background: #a7a5a5;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  line-height: 0;
+  padding-bottom: 4px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.btnQty.plus {
+  background: var(--primary-orange);
+  padding-bottom: 2px;
+}
+
+.qtyNumber {
+  font-weight: 700;
+  font-size: 18px;
+  min-width: 20px;
+  text-align: center;
+  transition: transform 180ms ease;
+}
+
+.notesArea {
+  margin: 0 10px 20px;
+  background: var(--bg-white);
+  border: 2px solid #b0b0b0;
+  border-radius: 10px;
+  padding: 12px 15px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    0 3px 6px rgba(0, 0, 0, 0.1);
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.notesArea i {
+  font-size: 18px;
+  color: #999;
+}
+
+.notesArea input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-family: "Poppins", sans-serif;
+  background: transparent;
+}
+
+.notesArea input::placeholder {
+  color: #999;
+  font-weight: 500;
+}
+
+/* ==========================================
+   BOTTOM ACTION BAR
+========================================== */
+
+.bottomActionBar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-white);
+  padding: 20px;
+  border-radius: 30px 30px 0 0;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #eee;
+  z-index: 50;
+  gap: 10px;
+}
+
+.totalPriceBox {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.totalPriceBox span {
+  font-size: 12px;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.totalPriceBox strong {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.btnPrimary {
+  background: var(--primary-orange);
+  color: white;
+  padding: 12px 25px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* ==========================================
+   EMPTY CART
+========================================== */
+
+.emptyCart {
+  text-align: center;
+  padding: 50px 20px;
+  height: 100%;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  animation: emptyCartAppear 450ms ease both;
+}
+
+.emptyCart > i {
+  font-size: 42px;
+  color: var(--primary-orange);
+  margin-bottom: 18px;
+}
+
+.emptyCart h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: var(--text-dark);
+}
+
+.emptyCart p {
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+.btnEmpty {
+  background: var(--primary-orange);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* ==========================================
+   NAVIGASI BAWAH - CART
+========================================== */
+
+.navBgWhite {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: var(--bg-white);
+  z-index: 90;
+  border-radius: 30px 30px 0 0;
+}
+
+.bottomNav {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(310px, calc(100% - 40px));
+  height: 55px;
+  background: var(--bg-cream);
+  border: 1.5px solid var(--primary-orange);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  padding: 0 10px;
+}
+
+.navItem {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-dark);
+  font-size: 22px;
+  text-decoration: none;
+  border-radius: 50%;
+  position: relative;
+  transition:
+    transform 250ms ease,
+    color 250ms ease,
+    background-color 250ms ease;
+}
+
+.navItem i {
+  transition: transform 250ms ease;
+}
+
+.cartNavActive {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(155, 34, 38, 0.4);
+  transform: translateY(-10px);
+  z-index: 110;
+  animation: cartTabPop 350ms ease both;
+}
+
+.cartNavActive i {
+  font-size: 26px;
+  display: inline-block;
+  animation:
+    cartIconBounce 450ms 80ms ease both,
+    cartActiveEntrance 0.8s ease both;
+}
+
+/* ==========================================
+   HOVER INTERACTIONS
+========================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .cartItem:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 12px 24px rgba(0, 0, 0, 0.17),
+      0 3px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-red);
+  }
+
+  .cartItem:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Ikon Back berputar 360 derajat */
+  .btnBack:hover {
+    box-shadow: 0 5px 12px rgba(155, 34, 38, 0.3);
+  }
+
+  .btnBack:hover i {
+    transform: rotate(-360deg);
+  }
+
+  .btnQty:hover {
+    transform: translateY(-3px) scale(1.08);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .btnQty.plus:hover {
+    background: var(--primary-orange-dark);
+  }
+
+  .btnPrimary:hover {
+    background: var(--primary-orange-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(244, 140, 6, 0.3);
+  }
+
+  .btnEmpty:hover {
+    background: var(--primary-orange-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(244, 140, 6, 0.3);
+  }
+
+  .navItem:not(.cartNavActive):hover i {
+    animation: cartIconBounce 420ms ease;
+  }
+
+  .btnPrimary:hover::after,
+  .btnEmpty:hover::after {
+    left: 135%;
+  }
+}
+
+/* ==========================================
+   ACTIVE / PRESS INTERACTIONS
+========================================== */
+
+.btnBack:active {
+  transform: scale(0.92);
+}
+
+.btnQty:active {
+  transform: scale(0.88);
+}
+
+.btnPrimary:active,
+.btnEmpty:active {
+  transform: scale(0.96);
+}
+
+.navItem:active i {
+  animation: cartIconBounce 350ms ease;
+}
+
+.notesArea:focus-within {
+  border-color: var(--primary-orange);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    0 0 0 3px rgba(244, 140, 6, 0.12);
+}
+
+/* ==========================================
+   SHINE EFFECT
+========================================== */
+
+.btnPrimary::after,
+.btnEmpty::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 45%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(25deg);
+  transition: left 550ms ease;
+  pointer-events: none;
+}
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes cartTabPop {
+  from {
+    opacity: 0.7;
+    transform: translateY(-10px) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-10px) scale(1);
+  }
+}
+
+@keyframes cartIconBounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes emptyCartAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cartActiveEntrance {
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  70% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes cartActiveHover {
+  0% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-10px);
+  }
+
+  50% {
+    transform: translateY(0);
+  }
+
+  70% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 399px) {
+  .bottomNav {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: min(310px, calc(100% - 40px));
+  }
+}
+
+/* ==========================================
+   REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .cartNavActive,
+  .cartNavActive i,
+  .emptyCart {
+    animation: none !important;
+  }
+
+  .cartItem,
+  .cartItem img,
+  .btnBack,
+  .btnBack i,
+  .btnQty,
+  .btnPrimary,
+  .btnEmpty,
+  .navItem,
+  .navItem i,
+  .notesArea {
+    transition: none !important;
+  }
+
+  .btnPrimary::after,
+  .btnEmpty::after {
+    display: none;
+  }
+}
+
+/* ==========================================
+   HOVER ICON BOTTOM NAVIGATION
+========================================== */
+
+.navItem {
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+/* Ikon tidak aktif berubah maroon saat hover */
+.navItem:not(.cartNavActive):hover {
+  color: var(--primary-red);
+  transform: translateY(-5px) scale(1.08);
+}
+
+.navItem:not(.cartNavActive):hover i {
+  color: var(--primary-red);
+}
+
+/* Ikon aktif tetap putih */
+.cartNavActive:hover,
+.cartNavActive:hover i {
+  color: #ffffff;
+}
+
+/* ==========================================
+   BOUNCE ICON ACTIVE CART
+========================================== */
+
+/* Bounce ulang ketika tombol aktif di-hover */
+.cartNavActive:hover i {
+  animation: cartActiveHover 0.6s ease both;
+}

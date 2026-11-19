@@ -1,0 +1,245 @@
+
+.page {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.mobileFrame {
+  width: min(
+    375px,
+    calc((100dvh - 32px) * 375 / 812),
+    calc(100vw - 32px)
+  );
+
+  height: min(
+    812px,
+    calc(100dvh - 32px),
+    calc((100vw - 32px) * 812 / 375)
+  );
+
+  aspect-ratio: 375 / 812;
+  min-height: 0;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 399px) {
+  .page {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .mobileFrame {
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-white);
+  position: relative;
+}
+
+/* BACKGROUND KREM BAGIAN ATAS */
+.qrisBgCream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: var(--bg-cream);
+  z-index: 1;
+}
+
+/* WRAPPER PUTIH MELENGKUNG */
+.qrisWrapper {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-white);
+  margin-top: 40px;
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* HEADER */
+.pageHeader {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 10px;
+  background: var(--bg-white);
+  font-weight: 700;
+  font-size: 18px;
+  gap: 15px;
+  flex-shrink: 0;
+  border-radius: 30px 30px 0 0;
+}
+
+.btnBack {
+  width: 35px;
+  height: 35px;
+  background: var(--primary-red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* KONTEN QRIS */
+.qrisContainer {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.qrisContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.qrisCard {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 280px;
+  flex-shrink: 0;
+}
+
+.qrisLogo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qrisNamaWarung {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+
+.qrisCodeImg {
+  width: 180px;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+.qrisTotal {
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-bottom: 5px;
+}
+
+.qrisHarga {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.qrisInstruction {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--text-gray);
+  text-align: center;
+}
+
+/* MODAL PEMBAYARAN */
+.overlayBg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 100;
+}
+
+.modalQris {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 200;
+  width: 80%;
+  max-width: 300px;
+}
+
+.modalQris h3 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: var(--text-dark);
+}
+
+.modalQris button {
+  background: var(--primary-orange);
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.2s ease;
+}
+
+.modalQris button:hover {
+  background: var(--primary-orange-dark);
+}
+
+/* RESPONSIVE HP */
+@media (max-width: 399px) {
+  .page {
+    padding: 0;
+  }
+
+  .mobileFrame {
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+}

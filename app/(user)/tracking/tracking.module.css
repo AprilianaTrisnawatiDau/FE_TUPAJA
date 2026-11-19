@@ -1,0 +1,736 @@
+
+/* ==========================================
+   TRACKING - WARUNG TUPAJA
+   Layout asli + micro-interactions
+========================================== */
+
+/* PAGE & MOBILE FRAME */
+
+.page {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.mobileFrame {
+  width: min(
+    375px,
+    calc((100dvh - 32px) * 375 / 812),
+    calc(100vw - 32px)
+  );
+
+  height: min(
+    812px,
+    calc(100dvh - 32px),
+    calc((100vw - 32px) * 812 / 375)
+  );
+
+  aspect-ratio: 375 / 812;
+  min-height: 0;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* SCREEN */
+
+.screen {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-white);
+  position: relative;
+}
+
+/* BACKGROUND KREM DAN WRAPPER PUTIH */
+
+.trackingBgCream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: var(--bg-cream);
+  z-index: 1;
+}
+
+.trackingWrapper {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-white);
+  margin-top: 40px;
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* HEADER */
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px 10px;
+  background: var(--bg-white);
+  font-weight: 800;
+  font-size: 18px;
+  gap: 15px;
+  flex-shrink: 0;
+  border-radius: 30px 30px 0 0;
+}
+
+.btnBack {
+  width: 35px;
+  height: 35px;
+  background: var(--primary-red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  flex-shrink: 0;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(155, 34, 38, 0.2);
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.btnBack i {
+  display: inline-block;
+  transition: transform 350ms ease;
+}
+
+/* AREA SCROLL */
+
+.scrollableContent {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding-bottom: 100px;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+
+.scrollableContent::-webkit-scrollbar {
+  display: none;
+}
+
+/* BANNER MEJA DAN ANTRIAN */
+
+.tableBanner {
+  background: #B52727;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 20px;
+  gap: 15px;
+}
+
+.antrianSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.antrianDivider {
+  font-weight: 400;
+  color: #ccc;
+}
+
+/* DAFTAR ITEM PESANAN */
+
+.trackingList {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.trackingItem {
+  background: white;
+  border: 1.5px solid #dcdcdc;
+  border-radius: 15px;
+  padding: 12px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+}
+
+.trackingItem img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  object-fit: cover;
+  border: 3px solid var(--bg-white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+  transition: transform 250ms ease;
+}
+
+.trackingDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.trackingDetails h4 {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+}
+
+.trackingDetails p {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+/* FOOTER STATUS, TOTAL, TOMBOL */
+
+.trackingFooter {
+  margin: 20px 20px 0;
+  padding: 10px 0 20px;
+  border-top: 1.5px solid var(--primary-orange);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footerTopRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 1px;
+  gap: 10px;
+}
+
+/* BADGE STATUS */
+
+.statusBadge {
+  font-size: 12px;
+  padding: 6px 20px;
+  border-radius: 12px;
+  font-weight: 800;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.menunggu {
+  background: #e0e0e0;
+  color: var(--text-dark);
+}
+
+.proses {
+  background: var(--primary-orange);
+  color: white;
+}
+
+.selesai {
+  background: #2a9d8f;
+  color: white;
+}
+
+.trackingTotal {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-top: 10px;
+  text-align: right;
+}
+
+.trackingTotal strong {
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.footerBottomRow {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 5px;
+}
+
+/* TOMBOL BATALKAN */
+
+.btnCancel {
+  background: var(--primary-orange);
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  font-size: 14px;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(244, 140, 6, 0.3);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.btnCancel:disabled {
+  background: #a7a5a5;
+  color: white;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* NAVIGASI BAWAH */
+
+.navBgWhite {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  background: var(--bg-white);
+  z-index: 90;
+  border-radius: 30px 30px 0 0;
+}
+
+.bottomNav {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(310px, calc(100% - 40px));
+  height: 55px;
+  background: var(--bg-cream);
+  border: 1.5px solid var(--primary-orange);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  z-index: 100;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  padding: 0 10px;
+}
+
+.navItem {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-dark);
+  font-size: 22px;
+  text-decoration: none;
+  border-radius: 50%;
+  position: relative;
+  transition:
+    transform 250ms ease,
+    color 250ms ease,
+    background-color 250ms ease;
+}
+
+.navItem i {
+  transition: transform 250ms ease;
+}
+
+/* TRACKING AKTIF */
+
+.trackingNavActive {
+  width: 60px;
+  height: 60px;
+  background: var(--primary-red);
+  color: white;
+  border-radius: 50%;
+  box-shadow: 0 4px 12px rgba(155, 34, 38, 0.4);
+  transform: translateY(-12px);
+  z-index: 110;
+  animation: trackingTabPop 350ms ease both;
+}
+
+.trackingNavActive i {
+  display: inline-block;
+  font-size: 26px;
+  color: #ffffff;
+  animation: trackingIconBounce 800ms ease-in-out 350ms both;
+}
+
+/* PESAN KOSONG */
+
+.emptyTracking {
+  text-align: center;
+  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  animation: emptyTrackingAppear 450ms ease both;
+}
+
+.emptyTracking h3 {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 10px;
+}
+
+.emptyTracking p {
+  font-size: 15px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.btnKembaliMenu {
+  background: var(--primary-orange);
+  color: white;
+  padding: 10px 25px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(244, 140, 6, 0.3);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+/* DAFTAR PESANAN */
+
+.ordersList {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 5px 20px 110px;
+}
+
+.orderCard {
+  width: 100%;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1.5px solid #dcdcdc;
+  border-radius: 12px;
+  overflow: hidden;
+  padding-bottom: 8px;
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.orderCard .tableBanner {
+  margin: 0;
+  border-radius: 10px 10px 8px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.orderCard .tableBanner strong {
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.orderCard .antrianSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.orderCard .trackingList {
+  padding: 8px 12px 0;
+  gap: 10px;
+}
+
+.orderCard .trackingItem {
+  min-height: 85px;
+  padding: 0 4px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  gap: 12px;
+}
+
+.orderCard .trackingItem img {
+  width: 95px;
+  height: 95px;
+  border-radius: 12px;
+}
+
+.orderCard .trackingDetails h4 {
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+
+.orderCard .trackingDetails p {
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.orderCard .trackingFooter {
+  display: block;
+  margin: 8px 16px 0;
+  padding: 8px 0 0;
+  border-top: 1.5px solid var(--primary-orange);
+}
+
+.orderCard .footerTopRow {
+  align-items: center;
+}
+
+.orderCard .statusBadge {
+  font-size: 11px;
+  padding: 5px 12px;
+}
+
+.orderCard .trackingTotal {
+  font-size: 12px;
+  margin: 0;
+}
+
+.orderCard .trackingTotal strong {
+  font-size: 13px;
+}
+
+.orderCard .footerBottomRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 6px;
+}
+
+.orderCard .btnCancel {
+  border-radius: 9px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+/* ==========================================
+   HOVER INTERACTIONS
+========================================== */
+
+@media (hover: hover) and (pointer: fine) {
+
+  /* Ikon Back berputar 360 derajat */
+  .btnBack:hover {
+    box-shadow: 0 5px 12px rgba(155, 34, 38, 0.3);
+  }
+
+  .btnBack:hover i {
+    transform: rotate(-360deg);
+  }
+
+  .trackingItem:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-color: var(--primary-orange);
+  }
+
+  .trackingItem:hover img {
+    transform: scale(1.04);
+  }
+
+  .orderCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.09);
+  }
+
+  .btnCancel:hover:not(:disabled) {
+    background: var(--primary-orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 13px rgba(244, 140, 6, 0.35);
+  }
+
+  .btnKembaliMenu:hover {
+    background: var(--primary-orange-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(244, 140, 6, 0.35);
+  }
+
+  .navItem:not(.trackingNavActive):hover {
+    color: var(--primary-red);
+    transform: translateY(-5px) scale(1.08);
+  }
+
+  .navItem:not(.trackingNavActive):hover i {
+    color: var(--primary-red);
+    animation: trackingIconBounce 800ms ease-in-out;
+  }
+
+  .trackingNavActive:hover {
+    color: #ffffff;
+  }
+
+  .trackingNavActive:hover i {
+    color: #ffffff;
+    animation: trackingIconBounce 800ms ease-in-out infinite;
+  }
+
+  .btnKembaliMenu:hover::after {
+    left: 135%;
+  }
+}
+
+/* PRESS INTERACTIONS */
+
+.btnBack:active {
+  transform: scale(0.92);
+}
+
+.btnCancel:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.btnKembaliMenu:active {
+  transform: scale(0.97);
+}
+
+.navItem:active i {
+  animation: trackingIconBounce 800ms ease-in-out;
+}
+
+/* SHINE EFFECT */
+
+.btnKembaliMenu::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 45%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(25deg);
+  transition: left 550ms ease;
+  pointer-events: none;
+}
+
+/* ANIMATIONS */
+
+@keyframes trackingTabPop {
+  from {
+    opacity: 0.7;
+    transform: translateY(-12px) scale(0.82);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-12px) scale(1);
+  }
+}
+
+@keyframes trackingIconBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+
+  20% {
+    transform: translateY(-10px);
+  }
+
+  40% {
+    transform: translateY(0);
+  }
+
+  60% {
+    transform: translateY(-6px);
+  }
+
+  80% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes emptyTrackingAppear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE HP */
+
+@media (max-width: 399px) {
+  .page {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .mobileFrame {
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+
+  .bottomNav {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: min(310px, calc(100% - 40px));
+  }
+}
+
+/* REDUCED MOTION */
+
+@media (prefers-reduced-motion: reduce) {
+  .trackingNavActive,
+  .trackingNavActive i,
+  .emptyTracking {
+    animation: none !important;
+  }
+
+  .btnBack,
+  .btnBack i,
+  .trackingItem,
+  .trackingItem img,
+  .orderCard,
+  .btnCancel,
+  .btnKembaliMenu,
+  .navItem,
+  .navItem i {
+    transition: none !important;
+  }
+
+  .btnKembaliMenu::after {
+    display: none;
+  }
+}

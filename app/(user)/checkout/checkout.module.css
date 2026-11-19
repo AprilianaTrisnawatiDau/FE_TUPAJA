@@ -1,0 +1,540 @@
+
+/* ==========================================
+   CHECKOUT - WARUNG TUPAJA
+========================================== */
+
+.page {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.mobileFrame {
+  width: min(
+    375px,
+    calc((100dvh - 32px) * 375 / 812),
+    calc(100vw - 32px)
+  );
+
+  height: min(
+    812px,
+    calc(100dvh - 32px),
+    calc((100vw - 32px) * 812 / 375)
+  );
+
+  aspect-ratio: 375 / 812;
+  min-height: 0;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 30px;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 399px) {
+  .page {
+    padding: 0;
+    background: #ffffff;
+  }
+
+  .mobileFrame {
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+/* ==========================================
+   SCREEN
+========================================== */
+
+.screen {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--bg-white);
+  position: relative;
+}
+
+.checkoutBgCream {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background: var(--bg-cream);
+  z-index: 1;
+}
+
+.checkoutWrapper {
+  position: relative;
+  z-index: 2;
+  background: var(--bg-white);
+  margin-top: 40px;
+  border-radius: 30px 30px 0 0;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  min-height: 0;
+  overflow: hidden;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.pageHeader {
+  display: flex;
+  align-items: center;
+  padding: 20px 20px 10px;
+  background: var(--bg-white);
+  font-weight: 700;
+  font-size: 18px;
+  gap: 15px;
+  flex-shrink: 0;
+  border-radius: 30px 30px 0 0;
+}
+
+.btnBack {
+  width: 35px;
+  height: 35px;
+  background: var(--primary-red);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ==========================================
+   SCROLLABLE CONTENT
+========================================== */
+
+.scrollableContent {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.scrollableContent::-webkit-scrollbar {
+  display: none;
+}
+
+.checkoutContent {
+  padding: 10px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ==========================================
+   FORM
+========================================== */
+
+.formGroup {
+  width: 100%;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.formControl {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1.5px solid #b0b0b0;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: "Poppins", sans-serif;
+  outline: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  background: white;
+  color: var(--text-dark);
+}
+
+.formControl:focus {
+  border-color: var(--primary-orange);
+}
+
+.errorText {
+  display: block;
+  color: #d93838;
+  font-size: 10px;
+  text-align: right;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* ==========================================
+   RADIO BUTTON
+========================================== */
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.radioOption {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  border: 1.5px solid #b0b0b0;
+  border-radius: 10px;
+  font-size: 14px;
+  background: white;
+  color: var(--text-dark);
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  font-family: "Poppins", sans-serif;
+  text-align: left;
+}
+
+.radioOption.selected {
+  border: 2px solid var(--primary-orange);
+}
+
+.radioCircle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #dcdcdc;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.radioOption.selected .radioCircle {
+  background: var(--primary-orange);
+}
+
+/* ==========================================
+   CATATAN
+========================================== */
+
+.catatanBox {
+  background: #fdf5e6;
+  border: 1px dashed var(--primary-orange);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 13px;
+  color: var(--text-dark);
+  font-style: italic;
+  overflow-wrap: anywhere;
+}
+
+/* ==========================================
+   RINGKASAN PESANAN
+========================================== */
+
+.summaryBox {
+  border: 1.5px solid var(--primary-orange);
+  border-radius: 10px;
+  padding: 15px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.summaryDivider {
+  height: 1px;
+  background: #eee;
+  margin: 5px 0;
+}
+
+/* ==========================================
+   CHECKOUT FOOTER
+========================================== */
+
+.checkoutFooter {
+  padding: 15px 20px 20px;
+  background: var(--bg-white);
+  flex-shrink: 0;
+  border-top: 1px solid #eee;
+}
+
+/* ==========================================
+   BUTTON KONFIRMASI
+========================================== */
+
+.btnKonfirmasi {
+  width: 100%;
+  background: var(--primary-orange);
+  color: white;
+  border: none;
+  padding: 15px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(244, 140, 6, 0.4);
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.btnKonfirmasi::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 45%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(25deg);
+  transition: left 550ms ease;
+  pointer-events: none;
+}
+
+/* ==========================================
+   EMPTY CHECKOUT
+========================================== */
+
+.emptyCheckout {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.emptyCheckout h3 {
+  font-size: 17px;
+  margin-bottom: 10px;
+}
+
+.emptyCheckout p {
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+/* ==========================================
+   BUTTON KEMBALI
+========================================== */
+
+.btnKembali {
+  display: inline-block;
+  background: var(--primary-orange);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btnKembali::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 45%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(25deg);
+  transition: left 550ms ease;
+  pointer-events: none;
+}
+
+/* ==========================================
+   MODAL
+========================================== */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modalCard {
+  background: white;
+  border-radius: 10px;
+  padding: 25px 20px;
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.modalCard h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 15px;
+  line-height: 1.4;
+}
+
+.modalCard p {
+  font-size: 13px;
+  color: var(--text-gray);
+  margin-bottom: 20px;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* ==========================================
+   MODAL BUTTON
+========================================== */
+
+.btnModalTidak,
+.btnModalYa,
+.btnModalOk {
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-family: "Poppins", sans-serif;
+}
+
+.btnModalTidak {
+  background: #e0e0e0;
+  color: var(--text-dark);
+}
+
+.btnModalYa,
+.btnModalOk {
+  background: var(--primary-orange);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btnModalOk {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.btnModalYa::after,
+.btnModalOk::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -75%;
+  width: 45%;
+  height: 200%;
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(25deg);
+  transition: left 550ms ease;
+  pointer-events: none;
+}
+
+/* ==========================================
+   HOVER INTERACTIONS
+========================================== */
+
+@media (hover: hover) and (pointer: fine) {
+  .btnKonfirmasi:hover,
+  .btnKembali:hover,
+  .btnModalYa:hover,
+  .btnModalOk:hover {
+    background: var(--primary-orange-dark);
+    transform: translateY(-3px);
+    box-shadow: 0 7px 15px rgba(244, 140, 6, 0.3);
+  }
+
+  .btnKonfirmasi:hover::after,
+  .btnKembali:hover::after,
+  .btnModalYa:hover::after,
+  .btnModalOk:hover::after {
+    left: 135%;
+  }
+}
+
+/* ==========================================
+   ACTIVE / PRESS INTERACTIONS
+========================================== */
+
+.btnKonfirmasi:active,
+.btnKembali:active,
+.btnModalYa:active,
+.btnModalOk:active {
+  transform: scale(0.96);
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 399px) {
+  .page {
+    padding: 0;
+  }
+
+  .mobileFrame {
+    width: 100vw;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 0;
+  }
+}
+
+/* ==========================================
+   REDUCED MOTION
+========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .btnKonfirmasi,
+  .btnKembali,
+  .btnModalYa,
+  .btnModalOk {
+    transition: none !important;
+  }
+
+  .btnKonfirmasi::after,
+  .btnKembali::after,
+  .btnModalYa::after,
+  .btnModalOk::after {
+    display: none;
+  }
+}

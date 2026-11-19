@@ -1,11 +1,14 @@
-
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { usePesananPelangganMentah } from "../../../lib/pesananPelanggan";
 import { useIsClient } from "../../../hooks/useIsClient";
 import styles from "./tracking.module.css";
+
+// Pesanan selesai masih tampil sebentar, lalu hilang dari daftar
+const LAMA_TAMPIL_SELESAI = 10000;
 
 function formatRupiah(value) {
   return `Rp${Number(value || 0).toLocaleString("id-ID")}`;
@@ -16,6 +19,12 @@ export default function TrackingPage() {
   // Status pesanan ikut berubah otomatis saat admin memperbarui pesanan
   const pesanan = usePesananPelangganMentah();
   const isClient = useIsClient();
+  const [sekarang, setSekarang] = useState(() => Date.now());
+
+  useEffect(() => {
+    const timer = setInterval(() => setSekarang(Date.now()), 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   function handleBatalkan(orderId) {
     router.push(
@@ -25,9 +34,13 @@ export default function TrackingPage() {
 
   if (!isClient) return null;
 
-  const pesananAktif = pesanan.filter(
-    (order) => order.status !== "Dibatalkan"
-  );
+  const pesananAktif = pesanan.filter((order) => {
+    if (order.status === "Dibatalkan") return false;
+    if (order.status === "Selesai") {
+      return sekarang - Number(order.waktuSelesai || 0) < LAMA_TAMPIL_SELESAI;
+    }
+    return true;
+  });
 
   return (
     <main className={styles.page}>

@@ -27,12 +27,12 @@ export default function BottomNav() {
                   className={cn(
                     "flex flex-col items-center justify-center transition duration-200 active:scale-90",
                     active
-                      ? "anim-nav-pop -mt-7 h-[54px] w-[54px] rounded-full bg-merah text-white shadow-lg shadow-merah/40 ring-4 ring-white"
+                      ? "anim-nav-pop -mt-7 h-[54px] w-[54px] rounded-full bg-merah text-black shadow-lg shadow-merah/40 ring-4 ring-white"
                       : "text-teks hover:-translate-y-0.5 hover:text-merah",
                   )}
                 >
                   <img
-                    src={`/images/ikon/${ikon}${active ? "-putih" : ""}.png`}
+                    src={`/images/ikon/${ikon}.png`}
                     alt=""
                     className={cn("object-contain", active ? "h-5 w-5" : "h-[18px] w-[18px]")}
                   />

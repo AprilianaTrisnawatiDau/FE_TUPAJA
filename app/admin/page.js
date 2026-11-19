@@ -1,5 +1,5 @@
 "use client";
-import { Star, Store, Info, UserRound, X } from "lucide-react";
+import { Star, Store, Info, UserRound } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import BottomNav from "@/components/layout/BottomNav";
@@ -177,9 +177,9 @@ export default function DashboardPage() {
         className="relative max-w-[280px] text-center"
       >
         <button onClick={() => setModalTutup(null)} className="absolute top-3 right-3" aria-label="Tutup">
-          <X className="h-4 w-4" strokeWidth={3} />
+          <img src="/images/ikon/silang.png" alt="" className="h-4 w-4 object-contain" />
         </button>
-        <Store className="anim-wiggle mx-auto h-12 w-12 fill-brand text-brand" strokeWidth={1.6} />
+        <img src="/images/ikon/warung-buka.png" alt="" className="anim-wiggle mx-auto h-12 w-auto" />
         <h3 className="mt-1 text-[15px] font-bold">Tutup Warung</h3>
         <p className="text-[10.5px] text-gray-600">Apakah anda yakin ingin menutup warung?</p>
         <div className="mt-3 flex gap-1.5 rounded-md bg-brand-soft p-2 text-left text-[9px] leading-snug text-gray-700">
@@ -210,12 +210,9 @@ export default function DashboardPage() {
         className="relative max-w-[280px] text-center"
       >
         <button onClick={() => setModalTutup(null)} className="absolute top-3 right-3" aria-label="Tutup">
-          <X className="h-4 w-4" strokeWidth={3} />
+          <img src="/images/ikon/silang.png" alt="" className="h-4 w-4 object-contain" />
         </button>
-        <div className="anim-wiggle relative mx-auto h-12 w-12">
-          <Store className="h-12 w-12 fill-brand text-brand" strokeWidth={1.6} />
-          <span className="absolute top-1/2 left-1/2 h-[3px] w-14 -translate-x-1/2 -translate-y-1/2 -rotate-45 rounded bg-brand-dark ring-2 ring-white" />
-        </div>
+        <img src="/images/ikon/warung-tutup.png" alt="" className="anim-wiggle mx-auto h-12 w-auto" />
         <h3 className="mt-1 text-[15px] font-bold">Warung Ditutup</h3>
         <p className="text-[10px] leading-snug text-gray-600">
           Warung saat ini tidak menerima pesanan. Silakan buka kembali warung saat sudah siap menerima pesanan lagi.

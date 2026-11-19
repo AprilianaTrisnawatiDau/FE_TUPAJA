@@ -586,6 +586,13 @@
   display: block;
 }
 
+.modalIconImg {
+  height: 52px;
+  width: auto;
+  margin: 0 auto;
+  display: block;
+}
+
 .modalCard h3 {
   font-size: 21px;
   font-weight: 800;

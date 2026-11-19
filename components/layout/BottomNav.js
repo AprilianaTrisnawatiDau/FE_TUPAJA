@@ -1,14 +1,13 @@
 "use client";
-import { Archive, ChartNoAxesColumnIncreasing, ClipboardPen, House, NotebookTabs } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/format";
 const items = [
-  { href: "/admin", label: "Home", icon: House },
-  { href: "/admin/pesanan", label: "Pesanan", icon: ClipboardPen },
-  { href: "/admin/menu", label: "Menu", icon: NotebookTabs },
-  { href: "/admin/stok", label: "Stok", icon: Archive },
-  { href: "/admin/laporan", label: "Laporan", icon: ChartNoAxesColumnIncreasing },
+  { href: "/admin", label: "Home", ikon: "home" },
+  { href: "/admin/pesanan", label: "Pesanan", ikon: "pesanan" },
+  { href: "/admin/menu", label: "Menu", ikon: "menu" },
+  { href: "/admin/stok", label: "Stok", ikon: "stok" },
+  { href: "/admin/laporan", label: "Laporan", ikon: "laporan" },
 ];
 /* Navigasi bawah: item aktif jadi lingkaran merah yang "naik" */
 export default function BottomNav() {
@@ -19,7 +18,7 @@ export default function BottomNav() {
       <div className="h-24" />
       <nav className="anim-fade-up no-print fixed bottom-3 left-1/2 z-40 w-[calc(min(100vw,430px)-28px)] -translate-x-1/2">
         <ul className="grid h-[52px] grid-cols-5 items-center rounded-2xl border-2 border-garis bg-white shadow-md">
-          {items.map(({ href, label, icon: Icon }) => {
+          {items.map(({ href, label, ikon }) => {
             const active = href === "/admin" ? path === "/admin" : path.startsWith(href);
             return (
               <li key={href} className="flex justify-center">
@@ -32,7 +31,11 @@ export default function BottomNav() {
                       : "text-teks hover:-translate-y-0.5 hover:text-merah",
                   )}
                 >
-                  <Icon className={active ? "h-5 w-5" : "h-[18px] w-[18px]"} strokeWidth={2.2} />
+                  <img
+                    src={`/images/ikon/${ikon}${active ? "-putih" : ""}.png`}
+                    alt=""
+                    className={cn("object-contain", active ? "h-5 w-5" : "h-[18px] w-[18px]")}
+                  />
                   <span className={cn("mt-0.5 font-medium", active ? "text-[8px]" : "text-[8.5px]")}>{label}</span>
                 </Link>
               </li>

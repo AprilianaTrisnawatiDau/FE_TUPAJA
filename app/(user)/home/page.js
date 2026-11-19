@@ -205,11 +205,11 @@ function HomeContent({ showClosedInitially = false }) {
               aria-label="Tutup"
               onClick={closeModalAndRedirect}
             >
-              <i className="fa-solid fa-xmark" />
+              <img src="/images/ikon/silang.png" alt="" style={{ width: 16, height: 16 }} />
             </button>
 
             <div className={styles.modalIcon}>
-              <i className="fa-solid fa-store-slash" />
+              <img src="/images/ikon/warung-tutup.png" alt="" className={styles.modalIconImg} />
             </div>
 
             <h3>Warung Tutup</h3>

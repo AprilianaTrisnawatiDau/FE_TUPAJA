@@ -1,5 +1,5 @@
 "use client";
-import { Printer, X } from "lucide-react";
+import { Printer } from "lucide-react";
 import { useEffect } from "react";
 import Button from "@/components/ui/Button";
 import FoodImage from "@/components/ui/FoodImage";
@@ -40,7 +40,7 @@ export function DetailPesananModal({ pesanan, onClose, onCetak }) {
       <div className="flex items-center justify-between border-b border-garis px-3.5 py-2.5">
         <h3 className="text-[12px] font-bold">Detail Pesanan</h3>
         <button onClick={onClose} aria-label="Tutup">
-          <X className="h-5 w-5" strokeWidth={2.8} />
+          <img src="/images/ikon/silang.png" alt="" className="h-4 w-4 object-contain" />
         </button>
       </div>
       <div className="border-b border-garis px-3.5 py-2.5">
@@ -96,7 +96,7 @@ export function StrukModal({ pesanan, onClose }) {
       <div className="flex items-center justify-between border-b border-garis px-3.5 py-2.5">
         <h3 className="text-[12px] font-bold">Struk Pesanan</h3>
         <button onClick={onClose} aria-label="Tutup" className="no-print">
-          <X className="h-5 w-5" strokeWidth={2.8} />
+          <img src="/images/ikon/silang.png" alt="" className="h-4 w-4 object-contain" />
         </button>
       </div>
       <div className="flex flex-col items-center border-b border-garis px-3.5 py-3 text-center">

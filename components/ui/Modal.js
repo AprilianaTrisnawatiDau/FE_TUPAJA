@@ -1,5 +1,5 @@
 "use client";
-import { CircleCheck, X } from "lucide-react";
+import { CircleCheck } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/format";
 import Button from "./Button";
@@ -62,7 +62,7 @@ export function Modal({ open, onClose, children, className, title }) {
               <h3 className="text-[13px] font-bold">{title}</h3>
               {onClose && (
                 <button onClick={onClose} aria-label="Tutup" className="transition hover:rotate-90 active:scale-90">
-                  <X className="h-5 w-5" strokeWidth={2.6} />
+                  <img src="/images/ikon/silang.png" alt="" className="h-4 w-4 object-contain" />
                 </button>
               )}
             </div>

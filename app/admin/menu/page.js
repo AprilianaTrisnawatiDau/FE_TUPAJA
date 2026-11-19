@@ -1,5 +1,5 @@
 "use client";
-import { ArrowLeft, ChevronRight, CirclePlus, Pencil, Trash2 } from "lucide-react";
+import { ArrowLeft, ChevronRight, CirclePlus } from "lucide-react";
 import { useState } from "react";
 import BottomNav from "@/components/layout/BottomNav";
 import PageHeader from "@/components/layout/PageHeader";
@@ -21,7 +21,7 @@ function AksiIkon({ onEdit, onHapus }) {
         className="flex h-[18px] w-[18px] items-center justify-center rounded-[3px] bg-brand text-white"
         aria-label="Edit"
       >
-        <Pencil className="h-3 w-3" strokeWidth={2.6} />
+        <img src="/images/ikon/pen.png" alt="" className="h-2.5 w-2.5 object-contain" />
       </button>
       <button
         onClick={(e) => {
@@ -30,7 +30,7 @@ function AksiIkon({ onEdit, onHapus }) {
         }}
         aria-label="Hapus"
       >
-        <Trash2 className="h-[17px] w-[17px] fill-black text-black" strokeWidth={1.6} />
+        <img src="/images/ikon/hapus.png" alt="" className="h-[17px] w-[17px] object-contain" />
       </button>
     </div>
   );

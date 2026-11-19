@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { getStatusWarung, useStatusWarung } from "../../../lib/statusWarung";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
@@ -35,8 +36,14 @@ function HomeContent({ showClosedInitially = false }) {
   const [keyword, setKeyword] = useState("");
   // Modal "warung tutup" langsung tampil bila warung sedang tutup
   const [showClosedModal, setShowClosedModal] = useState(
-    () => showClosedInitially || searchParams.get("tutup") === "true"
+    () =>
+      showClosedInitially ||
+      searchParams.get("tutup") === "true" ||
+      !getStatusWarung().buka
   );
+  // Kalau admin menutup warung saat pelanggan sedang di halaman ini, modal ikut muncul
+  const statusWarung = useStatusWarung();
+  const tampilModalTutup = showClosedModal || !statusWarung.buka;
 
   // Menyimpan data keranjang
   useEffect(() => {
@@ -189,7 +196,7 @@ function HomeContent({ showClosedInitially = false }) {
       />
 
       {/* MODAL WARUNG TUTUP */}
-      {showClosedModal && (
+      {tampilModalTutup && (
         <div className={styles.overlay}>
           <div className={styles.modalCard}>
             <button

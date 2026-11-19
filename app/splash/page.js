@@ -3,13 +3,14 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import { STORE_STATUS } from "../../data/storeConfig";
+import { getStatusWarung } from "../../lib/statusWarung";
 import styles from "../splash.module.css";
 
 export default function SplashPage() {
   useEffect(() => {
     const timer = setTimeout(() => {
-      if (STORE_STATUS === "buka") {
+      // Cek status yang diatur admin (Tutup/Buka Warung di dashboard)
+      if (getStatusWarung().buka) {
         window.location.replace("/home");
       } else {
         window.location.replace("/home?tutup=true");

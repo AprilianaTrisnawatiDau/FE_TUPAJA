@@ -80,7 +80,7 @@ function PembayaranQrisContent() {
                     </div>
 
                     <div className={styles.qrisNamaWarung}>
-                      Warung Tunggal Putra
+                      Warung Tupaja
                     </div>
 
                     <img

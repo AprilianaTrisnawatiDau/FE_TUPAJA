@@ -32,8 +32,6 @@ export default function SplashPage() {
               className={styles.logoImage}
               priority
             />
-
-            <div className={styles.logoShimmer}></div>
           </div>
         </div>
       </div>

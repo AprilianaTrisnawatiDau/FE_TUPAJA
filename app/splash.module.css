@@ -148,3 +148,12 @@
     animation: none;
   }
 }
+
+/* ==========================================
+   EFEK KILAU DIMATIKAN (permintaan tim)
+   Hapus blok ini kalau ingin kilau muncul lagi.
+========================================== */
+.splashScreen::before,
+.logoShimmer {
+  display: none;
+}

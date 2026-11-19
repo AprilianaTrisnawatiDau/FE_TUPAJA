@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 import styles from "./home.module.css";
@@ -13,57 +13,38 @@ import {
 } from "../../../data/menuData";
 
 import MobileFrame from "../../../components/layout/MobileFrame";
-import BottomNav from "../../../components/layout/BottomNav";
+import BottomNav from "../../../components/layout/CustomerBottomNav";
 import SearchBar from "../../../components/home/SearchBar";
 import PopularMenu from "../../../components/home/PopularMenu";
 import CategoryMenu from "../../../components/home/CategoryMenu";
 import MenuCard from "../../../components/home/MenuCard";
+import { ClientOnly, bacaStorage } from "../../../hooks/useIsClient";
 
 function HomeContent({ showClosedInitially = false }) {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const [cart, setCart] = useState([]);
+  // keranjang dibaca langsung dari localStorage (komponen ini hanya jalan di browser)
+  const [cart, setCart] = useState(() => {
+    const savedCart = bacaStorage("warungTupaja_cart", []);
+    return Array.isArray(savedCart) ? savedCart : [];
+  });
   const [activeCategory, setActiveCategory] = useState(
     categories?.[0]?.id || ""
   );
   const [keyword, setKeyword] = useState("");
-  const [showClosedModal, setShowClosedModal] = useState(false);
-  const [cartLoaded, setCartLoaded] = useState(false);
-
-  // Menampilkan modal jika warung sedang tutup
-  useEffect(() => {
-    if (
-      showClosedInitially ||
-      searchParams.get("tutup") === "true"
-    ) {
-      setShowClosedModal(true);
-    }
-  }, [showClosedInitially, searchParams]);
-
-  // Mengambil data keranjang
-  useEffect(() => {
-    try {
-      const savedCart = localStorage.getItem("warungTupaja_cart");
-
-      if (savedCart) {
-        setCart(JSON.parse(savedCart));
-      }
-    } catch (error) {
-      console.error("Gagal mengambil data keranjang:", error);
-    } finally {
-      setCartLoaded(true);
-    }
-  }, []);
+  // Modal "warung tutup" langsung tampil bila warung sedang tutup
+  const [showClosedModal, setShowClosedModal] = useState(
+    () => showClosedInitially || searchParams.get("tutup") === "true"
+  );
 
   // Menyimpan data keranjang
   useEffect(() => {
-    if (cartLoaded) {
-      localStorage.setItem(
-        "warungTupaja_cart",
-        JSON.stringify(cart)
-      );
-    }
-  }, [cart, cartLoaded]);
+    localStorage.setItem(
+      "warungTupaja_cart",
+      JSON.stringify(cart)
+    );
+  }, [cart]);
 
   // Menambahkan produk ke keranjang
   const addToCart = (menu) => {
@@ -130,7 +111,7 @@ function HomeContent({ showClosedInitially = false }) {
   const closeModalAndRedirect = () => {
     setShowClosedModal(false);
     sessionStorage.setItem("sudahLihatPopUp", "true");
-    window.location.href = "/warung-tutup";
+    router.push("/warung-tutup");
   };
 
   const activeCategoryName =
@@ -249,7 +230,9 @@ function HomeContent({ showClosedInitially = false }) {
 export default function HomePage(props) {
   return (
     <Suspense fallback={null}>
-      <HomeContent {...props} />
+      <ClientOnly>
+        <HomeContent {...props} />
+      </ClientOnly>
     </Suspense>
   );
 }

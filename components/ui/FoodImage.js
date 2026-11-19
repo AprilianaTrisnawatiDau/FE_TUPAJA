@@ -25,7 +25,6 @@ export default function FoodImage({ src, alt, className, minuman = false }) {
     );
   }
   return (
-    // eslint-disable-next-line @next/next/no-img-element
     <img ref={ref} src={src} alt={alt} className={cn("object-cover", className)} onError={() => setGagal(src)} />
   );
 }

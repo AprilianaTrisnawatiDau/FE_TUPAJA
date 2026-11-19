@@ -1,11 +1,12 @@
 
 "use client";
 
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import styles from "./rincian-pembatalan.module.css";
 import { getOrder } from "../../../services/orderStorage";
+import { ClientOnly, bacaStorage } from "../../../hooks/useIsClient";
 
 function formatRupiah(value) {
   return `Rp${Number(value || 0).toLocaleString("id-ID")}`;
@@ -15,33 +16,11 @@ function RincianPembatalanContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
 
-  const [pesanan, setPesanan] = useState(null);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    try {
-      let dataPesanan = orderId ? getOrder(orderId) : null;
-
-      if (!dataPesanan) {
-        const savedPesanan = localStorage.getItem(
-          "warungTupaja_pesanan_dibatalkan"
-        );
-
-        dataPesanan = savedPesanan
-          ? JSON.parse(savedPesanan)
-          : null;
-      }
-
-      setPesanan(dataPesanan);
-    } catch (error) {
-      console.error("Gagal membaca rincian pembatalan:", error);
-      setPesanan(null);
-    }
-
-    setLoaded(true);
-  }, [orderId]);
-
-  if (!loaded) return null;
+  // data langsung dibaca saat komponen dibuat (hanya jalan di browser)
+  const [pesanan] = useState(() => {
+    const dariOrder = orderId ? getOrder(orderId) : null;
+    return dariOrder || bacaStorage("warungTupaja_pesanan_dibatalkan", null);
+  });
 
   const items = Array.isArray(pesanan?.items)
     ? pesanan.items
@@ -166,7 +145,9 @@ function RincianPembatalanContent() {
 export default function RincianPembatalanPage() {
   return (
     <Suspense fallback={null}>
-      <RincianPembatalanContent />
+      <ClientOnly>
+        <RincianPembatalanContent />
+      </ClientOnly>
     </Suspense>
   );
 }

@@ -9,6 +9,7 @@ import {
   updateOrder,
 } from "../../../services/orderStorage";
 import styles from "./pembayaran-qris.module.css";
+import { ClientOnly } from "../../../hooks/useIsClient";
 
 function formatRupiah(value) {
   return `Rp${Number(value || 0).toLocaleString("id-ID")}`;
@@ -19,15 +20,15 @@ function PembayaranQrisContent() {
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
 
-  const [pesanan, setPesanan] = useState(null);
-  const [loaded, setLoaded] = useState(false);
+  // data pesanan dibaca langsung saat komponen dibuat (hanya jalan di browser)
+  const [pesanan, setPesanan] = useState(() =>
+    orderId ? getOrder(orderId) : null
+  );
   const [showModal, setShowModal] = useState(false);
 
+  // simulasi: pembayaran QRIS dianggap lunas setelah 3 detik
   useEffect(() => {
     const data = orderId ? getOrder(orderId) : null;
-
-    setPesanan(data);
-    setLoaded(true);
 
     if (!data || data.pembayaran === "Lunas") return;
 
@@ -50,7 +51,6 @@ function PembayaranQrisContent() {
     router.push("/tracking");
   }
 
-  if (!loaded) return null;
 
   return (
     <main className={styles.page}>
@@ -84,7 +84,7 @@ function PembayaranQrisContent() {
                     </div>
 
                     <img
-                      src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QR_code_for_mobile_English_Wikipedia.svg/1200px-QR_code_for_mobile_English_Wikipedia.svg.png"
+                      src="/images/qris-dummy.svg"
                       alt="QRIS Code Dummy"
                       className={styles.qrisCodeImg}
                     />
@@ -137,7 +137,9 @@ function PembayaranQrisContent() {
 export default function PembayaranQrisPage() {
   return (
     <Suspense fallback={null}>
-      <PembayaranQrisContent />
+      <ClientOnly>
+        <PembayaranQrisContent />
+      </ClientOnly>
     </Suspense>
   );
 }

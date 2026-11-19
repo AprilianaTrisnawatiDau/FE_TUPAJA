@@ -4,40 +4,36 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./cart.module.css";
+import { ClientOnly, bacaStorage } from "../../../hooks/useIsClient";
 
 function formatRupiah(value) {
     return `Rp${Number(value || 0).toLocaleString("id-ID")}`;
 }
 
 export default function CartPage() {
-    const [cart, setCart] = useState([]);
-    const [note, setNote] = useState("");
-    const [loaded, setLoaded] = useState(false);
+    return (
+        <ClientOnly>
+            <CartContent />
+        </ClientOnly>
+    );
+}
+
+function CartContent() {
+    // data langsung dibaca dari localStorage (komponen ini hanya jalan di browser)
+    const [cart, setCart] = useState(() => {
+        const savedCart = bacaStorage("warungTupaja_cart", []);
+        return Array.isArray(savedCart) ? savedCart : [];
+    });
+    const [note, setNote] = useState(
+        () => localStorage.getItem("warungTupaja_catatan") || ""
+    );
 
     useEffect(() => {
-        try {
-            const savedCart = JSON.parse(
-                localStorage.getItem("warungTupaja_cart") || "[]"
-            );
-
-            setCart(Array.isArray(savedCart) ? savedCart : []);
-        } catch (error) {
-            console.error("Gagal membaca keranjang:", error);
-            setCart([]);
-        }
-
-        setNote(localStorage.getItem("warungTupaja_catatan") || "");
-        setLoaded(true);
-    }, []);
-
-    useEffect(() => {
-        if (!loaded) return;
-
         localStorage.setItem(
             "warungTupaja_cart",
             JSON.stringify(cart)
         );
-    }, [cart, loaded]);
+    }, [cart]);
 
     const totalPrice = cart.reduce((total, item) => {
         return (
@@ -68,10 +64,6 @@ export default function CartPage() {
 
         setNote(value);
         localStorage.setItem("warungTupaja_catatan", value);
-    }
-
-    if (!loaded) {
-        return null;
     }
 
     return (

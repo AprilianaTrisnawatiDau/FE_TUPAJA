@@ -538,3 +538,14 @@
     display: none;
   }
 }
+
+/* ==========================================
+   EFEK KILAU DIMATIKAN (permintaan tim)
+   Hapus blok ini kalau ingin kilau muncul lagi.
+========================================== */
+.btnKonfirmasi::after,
+.btnKembali::after,
+.btnModalYa::after,
+.btnModalOk::after {
+  display: none;
+}

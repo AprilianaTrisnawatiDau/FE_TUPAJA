@@ -1,43 +1,42 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { addOrder } from "../../../services/orderStorage";
 import styles from "./checkout.module.css";
+import { ClientOnly, bacaStorage } from "../../../hooks/useIsClient";
 
 function formatRupiah(value) {
   return `Rp${Number(value || 0).toLocaleString("id-ID")}`;
 }
 
 export default function CheckoutPage() {
+  return (
+    <ClientOnly>
+      <CheckoutContent />
+    </ClientOnly>
+  );
+}
+
+function CheckoutContent() {
   const router = useRouter();
 
-  const [cart, setCart] = useState([]);
+  // data langsung dibaca dari localStorage (komponen ini hanya jalan di browser)
+  const [cart] = useState(() => {
+    const savedCart = bacaStorage("warungTupaja_cart", []);
+    return Array.isArray(savedCart) ? savedCart : [];
+  });
   const [nama, setNama] = useState("");
   const [metodePembayaran, setMetodePembayaran] = useState("Tunai");
   const [tipePemesanan, setTipePemesanan] = useState("Makan di Tempat");
-  const [catatan, setCatatan] = useState("");
-  const [loaded, setLoaded] = useState(false);
+  const [catatan, setCatatan] = useState(
+    () => localStorage.getItem("warungTupaja_catatan") || ""
+  );
   const [showModal, setShowModal] = useState(false);
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
   const [orderId, setOrderId] = useState(null);
-
-  useEffect(() => {
-    try {
-      const savedCart = JSON.parse(
-        localStorage.getItem("warungTupaja_cart") || "[]"
-      );
-
-      setCart(Array.isArray(savedCart) ? savedCart : []);
-    } catch {
-      setCart([]);
-    }
-
-    setCatatan(localStorage.getItem("warungTupaja_catatan") || "");
-    setLoaded(true);
-  }, []);
 
   const totalItems = cart.reduce(
     (total, item) => total + Number(item.quantity || 0),
@@ -102,7 +101,6 @@ export default function CheckoutPage() {
     router.push("/tracking");
   }
 
-  if (!loaded) return null;
 
   return (
     <main className={styles.page}>
@@ -198,7 +196,7 @@ export default function CheckoutPage() {
                     <div className={styles.formGroup}>
                       <label>Catatan Pesanan :</label>
                       <div className={styles.catatanBox}>
-                        "{catatan}"
+                        &ldquo;{catatan}&rdquo;
                       </div>
                     </div>
                   )}

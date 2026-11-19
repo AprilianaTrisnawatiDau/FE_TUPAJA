@@ -15,11 +15,6 @@ export default function WarungTutupPage() {
               className={styles.logoImage}
               priority
             />
-
-            <div
-              className={styles.logoShimmer}
-              aria-hidden="true"
-            />
           </div>
         </div>
       </div>
